@@ -1,0 +1,140 @@
+<html>
+<style>
+  body {
+    padding: 50px;
+    width: 1200px;
+    margin: auto;
+    text-align: left;
+    font-weight: 300;
+    font-family:  "Helvetica Neue", Helvetica;
+    color:#383838;
+    font-size: 20px;
+    line-height: 1.5;
+  }
+  table.center {
+  margin-left:auto;
+  margin-right:auto;
+}
+</style>
+<p style="font-family: helvetica">
+
+<h1 id="proj1">CS 194-26 Computer Vision & Computational Photography</h1>
+<h2 id="subtitle">Programming Project 2: Face Morphing</h2>
+<h2 id="subtitle">By Alek Petuskey</h2>
+<h2 id="overview">Overview</h2>
+<p> In this project I morph images into one another by cross-dissolving image color along with warping image shape based on key points.
+For a smooth tranition the points encapsulated key features such as the outling of the face, eyes, nose, and moulth.</p>
+<h2 id="overview">Defining Correspondences</h2>
+<p> In this section I used 50 key points on each face, Tom Brady and Steph Curry.
+I used Delaunay triangulation to produce a reasonable set of corresponding triangles on both
+faces based on the define points. This approach method avoids extremely small or large angles, which is
+beneficial when morhing and warping images. </p>
+
+<table style="width:50%" class="center">
+  <tr>
+    <th> <figcaption> Tom Brady (Left) & Steph Curry (Right)</figcaption> <img src="stephbradypts.png" alt="drawing" width="800"/> <th>
+  </tr>
+</table>
+
+
+
+<h2 id="overview">Computing the "Mid-way Face"</h2>
+<p> To compute the midway image between the two faces, I averaged the pairs of correspondence points for the two images and created
+an average Delaunay triangulation of the points. From each triangle in the mean face shape, the transformation matrix A  is calculated. We then
+perform an inverse warp to each triangle of the face of our corresponding images. Then interpolate the color values to each corresponding
+image. We then then take an average of the colors on both images, which creates a cross-dissolve aligned to the average face face.
+<table style="width:50%" class="center">
+  <tr>
+    <th> <img src="stephbradymix.png" alt="drawing" width="1000"/> <th>
+  </tr>
+</table>
+
+
+<h2 id="overview">The Morph Sequence</h2>
+<p> The morph sequence process is very similar computing the miodway face. We align the faces to a midway shape and cross-dissolve the interpolated values.
+I decieded to use 50 steps for the morph sequence.</p>
+<table style="width:50%" class="center">
+  <tr>
+    <th> <img src="brady.jpg" alt="drawing" width="300"/> <th>
+    <th> <img src="sb_10.gif" alt="drawing" width="400"/> <th>
+    <th> <img src="steph.jpg" alt="drawing" width="300"/> <th>
+  </tr>
+</table>
+
+<h2 id="overview">The "Mean face" of a population</h2>
+<p> I used the Dane dataset due to its nicley formatted photos and uniformly labeled points. As seen below I averaged all of the
+postions of the faces seperatly. Additionally I also created a seperate female only average because the since the dataset was
+primarily male dominated the average looked only male.
+<h3 id="overview">Average Male</h3>
+<table style="width:50%" class="center">
+  <tr>
+    <th> <img src="m_avg.png" alt="drawing" width="1000"/> <th>
+  </tr>
+</table>
+<h3 id="overview">Average Female</h3>
+<table style="width:50%" class="center">
+  <tr>
+    <th> <img src="f_avg.png" alt="drawing" width="1000"/> <th>
+  </tr>
+</table>
+
+<h3 id="overview">Morphing To Average</h3>
+<h3 id="overview"> Danish Computer Scientists</h3>
+<table style="width:50%" class="center">
+  <tr>
+    <th> <figcaption> Male 1 to Average Male</figcaption> <img src="morph_slow_avg_male1.gif"  width="250"/> <th>
+    <th> <figcaption> Male 2 to Average Male</figcaption> <img src="morph_slow_avg_male2.gif"  width="250"/> <th>
+    <th> <figcaption> Female 1 to Average Female</figcaption> <img src="morph_slow_avg_female1.gif"width="250"/> <th>
+    <th> <figcaption> Female 2 to Average Female</figcaption> <img src="morph_slow_avg_female2.gif" width="250"/> <th>
+  </tr>
+</table>
+<h3 id="overview"> Myself to Average Male Danish Comuter Scientist</h3>
+<table style="width:100%" class="center">
+  <tr>
+    <th><img src="morph_slow_avg_me.gif" alt="drawing" width="1000"/> <th>
+  </tr>
+</table>
+
+
+<h2 id="overview">Caricatures: Extrapolating from the mean</h2>
+<p> To produce a caricature, I extrapolated from the Danish mean by finding the difference between my face
+  and the mean face. I then added a scalar alpha to it to exagerrate these differences.
+ </p>
+
+<h3 id="overview"> Male Danish Computer Scientist Example</h3>
+<table style="width:50%" class="center">
+  <tr>
+    <th> <img src="mchar.png" alt="drawing" width="1000"/> <th>
+  </tr>
+</table>
+<h3 id="overview"> Female Danish Computer Scientist Example</h3>
+<table style="width:50%" class="center">
+  <tr>
+    <th> <img src="fchar.png" alt="drawing" width="1000"/> <th>
+  </tr>
+</table>
+<h3 id="overview"> Myself with Average Male Computer Scientist</h3>
+<table style="width:50%" class="center">
+  <tr>
+    <th> <img src="mychar.png" alt="drawing" width="1000"/> <th>
+  </tr>
+</table>
+
+<h2 id="overview">Bells and Whistles</h2>
+<h3 id="overview">Face Morph To Danish Female</h3>
+<table style="width:100%" class="center">
+  <tr>
+    <th>  <figcaption> Morphing Just Shape</figcaption><img src="alekfshape.png" alt="drawing" width="350"/> <th>
+    <th> <figcaption>Morphing Just Color</figcaption><img src="alekfcolor.png" alt="drawing" width="350"/>  <th>
+    <th>  <figcaption>Morphing Both Color & Shape</figcaption> <img src="alekf.png" alt="drawing" width="350"/><th>
+  <tr>
+</table>
+<h3 id="overview">My Face Morph To Danish Female Gif</h3>
+<table style="width:100%" class="center">
+  <tr>
+    <th><th>
+    <th> <figcaption> <img src="morph_slow_me_female.gif" alt="drawing" width="400"/>  <th>
+    <th><th>
+  <tr>
+</table>
+</html>
