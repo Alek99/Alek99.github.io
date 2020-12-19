@@ -83,9 +83,12 @@ and y gradients of an image and then used all the gradients along with pizel int
 
 <h2 id="overview">Part 2.2 Poisson Blending</h2>
 <p> In this part of the project I started by creating a function that selected the boundaries from the target and source regions, indicating
-  what regions should be blended. I then translate the image 
+  what regions should be blended. I then translated the source image so that indices of pixels in the source and target regions correspond.
+  I then solved the blending contraints seen in the equation below. Following that step I copied these solved 
+  values into my target image.
 </p>
-
+  
+<th><img src="shark1.png" alt="drawing" width="300"/></th>
 <table style="width:50%" class="center">
   <tr>
 
