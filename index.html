@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<style>
+  body {
+    padding: 50px;
+    width: 1200px;
+    margin: auto;
+    text-align: left;
+    font-weight: 300;
+    font-family:  "Helvetica Neue", Helvetica;
+    color:#383838;
+    font-size: 20px;
+    line-height: 1.5;
+  }
+  table.center {
+  margin-left:auto;
+  margin-right:auto;
+}
+</style>
+<p style="font-family: helvetica">
+
+<h1 id="proj1">CS 194-26 Computer Vision & Computational Photography</h1>
+<h2 id="subtitle">Final Project 1 & 2</h2>
+<h2 id="subtitle">By Alek Petuskey</h2>
+<h2 id="overview">Overview</h2>
+<p> For my final project I completed two final pre-canned projects. The first is where I reimplement 
+a neural algorithm of artistic style. In the second project I explore gradient-domain processing, a 
+simple technique with a broad set of applications including blending, tone-mapping, and non-photorealistic rendering.</p>
+<h2 id="overview">Final Project 1: Reimplement the Neural Algorithm of Artistic Style</h2>
+<p> The first step of this project was finding a way to seperate an image into its style and content representations.
+When combined these have the ability to reproduce an image with a different style. Following Gatys, Ecker, and Bethge's paper
+A Neural Algorithm of Artistic Style I used a pretrained VGG-19 model. After every convolutional layer calculated style_loss and content_loss 
+layers. This represented the  similarity between convolutional activation value, through my iterations.
+</p>
+<h2 id="overview">Results</h2>
+<p> Below are the results of thge style transfer. The left is the input image, the middle
+is the styling image, and the right is the output. Overall I had pretty good results, however, I noticed sparse
+images struggle with images with lots of lines, corners, and features did better. 
+</p>
+<table style="width:50%" class="center">
+  <tr>
+    <th>Input Image</th>
+    <th>Style Image</th>
+    <th>Output Image</th>
+  <tr>
+    <th><img src="hike.jpg" alt="drawing" width="400"/></th>
+    <th><img src="large.jpg" alt="drawing" width="425"/></th>
+    <th><img src="water.png" alt="drawing" width="396"/></th>
+  <tr>
+</table>
+
+<table style="width:50%" class="center">
+  <tr>
+    <th><img src="hike.png" alt="drawing" width="1200"/></th>
+  <tr>
+    <th><img src="space.png" alt="drawing" width="1200"/></th>
+  <tr>
+    <th><img src="boat.png" alt="drawing" width="1200"/></th>
+  <tr>
+    <th><img src="deli.png" alt="drawing" width="1200"/></th>
+  <tr>
+</table>
+<h2 id="overview">Final Project 2: Gradient Domain Fushion</h2>
+<p> In this assignment I seemlessly blend an object or texture from a source image into a target image.
+In reality one can just copy and paste one cropped picture to another however this creates unpleasent seems.
+The goal of this project will be to get rid of these seems while maintaining the perception of the source region.
+I did this by writing the objective function as a set of least squares constraints in the form (Av-b)^2 and solved 
+for v.</p>
+
+<h2 id="overview">Part 2.1 Toy Problem</h2>
+<p> In this part of the project I implement gradient domain processing of a toy image. I started by computing the x
+and y gradients of an image and then used all the gradients along with pizel intensity to reconstruct the image v.
+</p>
+<table style="width:50%" class="center">
+  <tr>
+    <th>Original Image</th>
+    <th>Reconstructed Image</th>
+  <tr>
+    <th><img src="origin.png" alt="drawing" width="350"/></th>
+    <th><img src="recon.png" alt="drawing" width="350"/></th>
+  <tr>
+</table>
+
+<h2 id="overview">Part 2.2 Poisson Blending</h2>
+<p> In this part of the project I started by creating a function that selected the boundaries from the target and source regions, indicating
+  what regions should be blended. I then translate the image 
+</p>
+
+<table style="width:50%" class="center">
+  <tr>
+
+    <th><img src="shark1.png" alt="drawing" width="300"/></th>
+    <th><img src="shark2.png" alt="drawing" width="300"/></th>
+    <th><img src="shark3.png" alt="drawing" width="300"/></th>
+    <th><img src="shark4.png" alt="drawing" width="300"/></th>
+  <tr>
+      <th><img src="north.png" alt="drawing" width="300"/></th>
+      <th><img src="north-1.png" alt="drawing" width="300"/></th>
+      <th><img src="north-2.png" alt="drawing" width="300"/></th>
+      <th><img src="north-3.png" alt="drawing" width="300"/></th>
+  <tr>
+  <tr>
+      <th><img src="desert.png" alt="drawing" width="300"/></th>
+      <th><img src="desert-1.png" alt="drawing" width="300"/></th>
+      <th><img src="desert-2.png" alt="drawing" width="300"/></th>
+      <th><img src="desert-3.png" alt="drawing" width="300"/></th>
+      <tr>
+</table>
+</html>
